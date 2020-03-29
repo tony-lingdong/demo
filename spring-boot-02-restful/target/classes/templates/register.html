@@ -1,0 +1,257 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <meta charset="UTF-8">
+  <title>  </title>
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/css/index-new.css">
+<style>
+	#register{
+		width:1250px;
+		margin:auto;
+		height:960px;
+	}
+	#register>.register_head{
+		width:1000px;
+		padding-top:10px;
+		height:80px;
+/*		background:#fff;*/
+		margin:auto;
+		vertical-align:middle;
+		border-bottom:3px solid #FF60AF;
+	}
+	#register>.register_head img{
+		width:60px;
+		height:55px;
+		margin-left:30px;
+	}
+	/*		logo字体*/
+	#register>.register_head>h3{
+			line-height:1em;
+			font-weight: 400;
+			color:#535353;
+			display:inline-block;
+	}	
+	
+/*	欢迎注册字体*/
+	#register>.register_head>h2{
+			font-weight: 400;
+			color:#535353;
+			display:inline-block;
+			padding-left:10px;
+		}	
+
+	#register .register_box{
+	margin-top:100px;
+		width:980px;
+		height:510px;
+		margin:auto;
+		background:#F5F5F5;
+		box-shadow:-10px 10px  2px #EBEEEF;
+		position:relative;
+		margin-top:50px;
+	} 
+/*	页面背景*/
+	body{
+		background:#F5F5F5;
+	}
+/*	表单*/
+	#register form{
+		width:990px;
+		height:520px;
+		position:absolute;
+		background:#fff;
+		top:-10px;
+	}
+/*	input外层大的div*/
+	#register .register_form{
+		position:absolute;
+		width:850px;
+		height:350px;
+		top:75px;
+		left:240px;
+		padding:10px;
+	}
+/*	输入框外div*/
+	.register_form>div{
+		border-bottom:1px solid #F2F2F2;
+		width:100%;
+		height:60px;
+		box-sizing:border-box;
+	}
+/*	输入框*/
+	input{
+		width:300px;
+		height:100%;
+    font-size: 14px;
+    border:none;
+    outline: none;
+		margin-left:50px;
+		vertical-align:middle;
+
+	}
+/*	注册按钮*/
+	#i222{
+		width:400px;
+		height:45px;
+		margin-left:50px;
+		border:none;
+		background:#FE5478;
+		border-radius:5px;
+	}
+/*	input 图片*/
+	img{
+		width:25px;
+		height:25px;
+		vertical-align:middle;
+	}
+/*	已有账号请登录*/
+	.register_form>h6{
+		font-weight:400;
+		padding:10px 0 10px 320px;
+	}
+	/*	页脚*/
+	.third{
+		height:200px;
+		text-align:center;
+		padding-top:55px;
+	}
+	.third>a{
+		margin-right:20px;
+		line-height:30px;
+	}
+	.third>span{
+		color:#535353;
+	}
+	.tian{
+		color: red;
+		float: right;
+		font-size: 12px;
+		margin-right: 240px;
+	}
+</style>	
+ </head>
+ <body>
+ <!-- 1. 页面头部 -->
+ <div th:replace="commons/header::header"></div>
+ <div id="register" style="margin-top: 50px">
+	<div class="register_head">
+		<h3><img src="/img/logo/logo.png">赫兹</h3><h2>欢迎注册</h2>
+	</div>
+	<div class="register_box">
+		<form name="tijiao" th:action="@{/user/register}" th:method="post" onsubmit="return check()">
+			<div class="register_form">
+
+				<div>
+					用户名：&nbsp;&nbsp;&nbsp;
+					<input type="text" id="text1" name="username" placeholder="用户名" onblur="check()">
+					<span id="div1" class="tian" >*(为必填)</span>
+				</div>
+
+				<div>
+					密码：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input id="text2" type="password"  name="password" placeholder="用户密码" onblur="check()">
+					<span id="div2" class="tian" >*(为必填)</span>
+				</div>
+				<div>
+					确认密码：<input id="text3" type="password" placeholder="再次输入密码" >
+					<span id="div3" class="tian" >*(为必填)</span>
+				</div>
+				<h6><a th:href="@{/login_page}">已有账号？请登录</a></h6>
+				<input id="i222" type="submit" th:value="注册">
+			</div>
+		</form>
+	</div>
+ <div class="third">
+			<a href="#">关于赫兹</a>|
+			<a href="#">联系我们</a>|
+			<a href="#">商务合作</a>|
+			<a href="#">友情链接</a>|
+			<a href="#">销售联盟</a>|
+			<a href="#">赫兹社区</a>|
+			<a href="#">赫兹社区</a>|
+			<a href="#">赫兹社区</a>|
+			<a href="#">赫兹社区</a>|
+			<a href="#">赫兹社区</a>
+			<a href="#"></a><br>
+			<span>Copyright&copy;2019 赫兹.com版权所有 </span>
+	</div>
+ </div>
+ <script>
+     document.getElementById('i222').onclick = function(){
+         location.reload();
+     }
+
+     //用户名验证
+     function checkname(){
+         var div = document.getElementById("div1");
+         div.innerHTML = "";
+         var name1 = document.tijiao.text1.value;
+         if (name1 == "") {
+             div.innerHTML = "用户名不能为空！";
+             document.tijiao.text1.focus();
+             return false;
+         }
+         if (name1.length < 4 || name1.length > 16) {
+             div.innerHTML = "长度4-16个字符";
+             document.tijiao.text1.select();
+             return false;
+         }
+         var charname1 = name1.toLowerCase();
+         for (var i = 0; i < name1.length; i++) {
+             var charname = charname1.charAt(i);
+             if (!(charname >= 0 && charname <= 9) && (!(charname >= 'a' && charname <= 'z')) && (charname != '_')) {
+                 div.innerHTML = "用户名包含非法字符";
+                 document.form1.text1.select();
+                 return false;
+             }
+         }
+         return true;
+     }
+
+     //密码验证
+     function checkpassword(){
+         var div = document.getElementById("div2");
+         div.innerHTML = "";
+         var password = document.tijiao.text2.value;
+         if (password == "") {
+             div.innerHTML = "密码不能为空";
+             document.tijao.text2.focus();
+             return false;
+         }
+         if (password.length < 4 || password.length > 16) {
+             div.innerHTML = "密码长度为4-16位";
+             document.tijiao.text2.select();
+             return false;
+         }
+         return true;
+     }
+
+     function checkrepassword(){
+         var div = document.getElementById("div3");
+         div.innerHTML = "";
+         var password = document.tijiao.text2.value;
+         var repass = document.tijiao.text3.value;
+         if (repass == "") {
+             div.innerHTML = "密码不能为空";
+             document.tijiao.text3.focus();
+             return false;
+         }
+         if (password != repass) {
+             div.innerHTML = "密码不一致";
+             document.tijiao.text3.select();
+             return false;
+         }
+         return true;
+     }
+     function check(){
+         if (checkname() && checkpassword() && checkrepassword()) {
+             return true;
+         }
+         else {
+             return false;
+         }
+     }
+ </script>
+ </body>
+</html>

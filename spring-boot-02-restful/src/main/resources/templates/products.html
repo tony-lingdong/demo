@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <meta charset="UTF-8">
+  <title>商品列表页 </title>
+	<link rel="stylesheet" href="/css/products.css">
+	<link rel="stylesheet" href="/css/common.css">
+	 <link rel="stylesheet" href="/css/index-new.css">
+	 <script src="/js/other/jquery.js"></script>
+	 <script src="/js/index.js"></script>
+ </head>
+ <body class="main">
+ <header>
+	 <!-- 1. 页面头部 -->
+	 <div th:replace="commons/header::header"></div>
+	 <!--2. 页面轮播 -->
+	 <div id="box">
+		 <ul class="ul_list">
+			 <li><a th:href="@{/detail/}+${72}" ><img src="/img/banner/1.png"/></a></li>
+			 <li><a th:href="@{/detail/}+${73}" ><img src="/img/banner/2.png"/></a></li>
+			 <li><a th:href="@{/detail/}+${74}" ><img src="/img/banner/3.png"/></a></li>
+			 <li><a th:href="@{/detail/}+${75}" ><img src="/img/banner/4.png"/></a></li>
+			 <li><a th:href="@{/detail/}+${72}" ><img src="/img/banner/1.png"/></a></li>
+		 </ul>
+		 <div class="odiv_nav">
+			 <span></span>   <span></span>   <span></span>  <span></span>
+		 </div>
+		 <div class="left_click">&lt;</div>
+		 <div class="right_click">&gt;</div>
+		 <div class="btn_left"></div>
+		 <div class="btn_right"></div>
+	 </div>
+ </header>
+ <script>
+ </script>
+
+  <div id="products" >
+	<p class="top">
+	<a href="#">首页></a>
+	<a href="#">商品推荐</a>
+ </p>
+<!--1 左侧div：热销单品推荐 -->
+		<div class="hot">
+			<p>热销单品</p>
+			<ul>
+			<li>
+				<a th:href="@{/detail/}+${1}"><img src="/img/floor/1.jpg" ></a><p>真爱<br> ￥269</p>
+			</li><li>
+				<a th:href="@{/detail/}+${2}"><img src="/img/floor/2.jpg" ></a><p>情深<br> ￥339</p>
+			</li><li>
+				<a th:href="@{/detail/}+${3}"><img src="/img/floor/3.jpg" ></a><p>承诺<br> ￥289</p>
+			</li><li>
+				<a th:href="@{/detail/}+${4}"><img src="/img/floor/4.jpg" ></a><p>钟情<br> ￥289</p>
+			</li><li>
+				<a th:href="@{/detail/}+${5}"><img src="/img/floor/5.jpg" ></a><p>永恒<br> ￥159</p>
+			</li><li>
+				<a th:href="@{/detail/}+${6}"><img src="/img/floor/6.jpg" ></a><p>子衿<br> ￥188</p>
+			</li>
+			</ul>
+		</div>
+ <div id="right">
+ <div class="article">
+	
+ </div>
+<!--2 上边div：商品筛选 -->
+		<div class="choose">
+			<h3>商品筛选</h3>
+			<p>价格：
+				<a th:href="@{/low/}+${100}+@{/high/}+${200}">100-200元</a>
+				<a th:href="@{/low/}+${200}+@{/high/}+${300}">200-300元</a>
+				<a th:href="@{/low/}+${300}+@{/high/}+${500}">300-500元</a>
+				<a th:href="@{/low/}+${500}+@{/high/}+${800}">500-800元</a>
+				<a th:href="@{/low/}+${800}+@{/high/}+${4000}">800元以上</a>
+			<p>类型：
+				<a th:href="@{/search/}+${1}">圣诞节</a>
+				<a th:href="@{/search/}+${2}">女神节</a>
+				<a th:href="@{/search/}+${3}">送女友</a>
+				<a th:href="@{/search/}+${4}">送老师</a>
+				<a th:href="@{/search/}+${5}">送朋友</a>
+				<a th:href="@{/search/}+${6}">送妈妈</a>
+				<a th:href="@{/search/}+${7}">送奶奶</a>
+				<a th:href="@{/search/}+${8}">清明节</a>
+				<a th:href="@{/search/}+${9}">重阳节</a>
+				<a th:href="@{/search/}+${10}">七夕</a></p>
+			</div><br>
+<!--3 排序方式	 -->
+		<div class="sort_style">
+
+			<p>排序方式：
+					<a href="#">默认</a>
+					<a href="#">销量↓</a>
+					<a href="#">人气↓</a>
+					<a href="#">价格↓</a>
+			</p>
+		</div>
+<!--4 中间div：商品模块	 -->
+		<div class="product">
+			<tbody>
+			<tr th:each="flower:${flower}">
+				<p>
+				<a th:href="@{/detail/}+${flower.id}"><img th:src="${flower.pic}" th:width="100"></a><br>
+				<a href="#" th:text="${flower.name}"></a><br>
+				<b th:text="￥+${flower.price}"></b><br>
+				</p>
+			</tr>
+			</tbody>
+		</div>
+<!--5 最下div：分页 -->
+		<div class="limit">
+			<p class="p">共[[${pageInfo.totalNum}]]条记录
+				<a href="#" th:href="@{/products(pageNum=1)}">1</a>
+				<a href="#" th:href="@{/products(pageNum=2)}">2</a>
+				<a href="#" th:href="@{/products(pageNum=3)}">3</a>
+				<a href="#" th:href="@{/products(pageNum=4)}">4</a>
+				<a href="#" th:href="@{/products(pageNum=5)}">下一页</a>
+				<a href="#" th:href="@{/products(pageNum=6)}">尾页</a>
+			</p></div>
+ </div>
+<!--6 右侧div：咨询客服和返回顶部等服务帮助 -->
+		<ul class="r_side">
+			<li>
+				<img src="/img/kefu.png"><br>
+				<a href="#"> 客服</a></li>
+			<li>
+				<img src="/img/sc.png"><br>
+				<a href="#"> 收藏</a></li>
+			<li>
+				<img src="/img/top.png"><br>
+				<a href="#"> 顶部</a></li>
+		</ul>
+	</div>
+ </body>
+</html>

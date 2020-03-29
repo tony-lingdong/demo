@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="header" th:fragment="header">
+    <!-- 大的div -->
+    <div id="container_header">
+        <!--左侧部分-->
+        <div class="header_left">
+            <ul class="ul">
+                <li><span class="span">Welcome</span></li>
+                <li><a th:href="@{/index_page}">首页</a></li>
+                <li><a href="#">收藏</a></li>
+                <li><a th:href="@{/products}">产品分类</a>
+                    <span class="caret"></span></li>
+            </ul>
+        </div>
+        <!--右侧部分-->
+        <div class="header_right">
+            <form action="#" th:if="${session.username}==null">
+            <!--<input type="text" class="search" placeholder="请输入商品关键词">-->
+            <a th:href="@{/register_page}" class="a" >注册</a>
+            <a class="a"><span> |</span></a>
+            <a th:href="@{/login_page}" class="a">登录</a>
+            <a class="a"><span> |</span></a>
+        </form>
+            <form action="#" th:if="${session.username}!=null">
+                <!--<input type="text" class="search" placeholder="请输入商品关键词">-->
+                <a th:text="欢迎您"></a>
+                <a th:href="@{/user/toedituser}" th:text="${session.username}" class="a" ></a>
+                <a class="a"><span> |</span></a>
+                <a th:href="@{/cart}" class="a">购物车</a>
+                <a class="a"><span> |</span></a>
+                <a th:href="@{/myorder}" class="a">我的订单</a>
+                <a class="a"><span> |</span></a>
+                <a th:href="@{/user/logout}"  class="a">退出</a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
