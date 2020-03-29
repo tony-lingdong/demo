@@ -1,2 +1,2 @@
-# demo
-this is a demo
+# springboot项目鲜花商城
+使用springboot快速开发，整合了mybatis，前端使用juery库和JavaScript，前端模板引擎使用了thymeleaf,在springmvc三层架构下编写了代码。
